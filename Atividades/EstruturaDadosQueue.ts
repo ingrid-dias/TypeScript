@@ -1,61 +1,65 @@
-import readlinesync = require("readline-sync");
-import { Queue } from "./Queue";
+const readline = require("readline-sync");
 
-let opcao: Number
-let nome: string
+import {Queue} from "./Queue";
 
 const fila = new Queue<string>();
 
+let opcao: number; 
+
 do{
-console.log("*****************************************************");
-console.log("                                                     ");
-console.log("            1 - Adicionar Clientes na Fila           ");
-console.log("            2 - Listar todos os Clientes             ");
-console.log("            3 - Retirar Cliente da fila              ");
-console.log("            0 - Sair                                 ");
-console.log("                                                     ");
-console.log("*****************************************************");
-
-opcao = readlinesync.questionInt("Digite a opcao que deseja: ");
-
-switch(opcao){
-    case 1:
-      nome = readlinesync.question("\nDigite o nome: ")
-        fila.enqueue(nome)
-        console.log("Fila: ")
-        fila.printQueue()
-        console.log("Cliente adicionado!")
-        break;
-
-    case 2:
-        if(fila.isEmpty())
-        console.log("A fila está vazia!")
-
-    else{
-        console.log("Lista de Clientes na fila")
-        fila.printQueue()
-
-    }
-        break;
-
-    case 3:
-        if(fila.isEmpty())
-        console.log("A fila está vazia!")
         
-        else{
-            fila.dequeue()
-            console.log("Fila: ")
-            fila.printQueue()
-            console.log("O cliente foi chamado!")
+        console.log("*******************************************");
+        console.log("                                           ");
+        console.log("         1- Adicionar cliente na fila      ");
+        console.log("         2- Listar todos os clientes       ");
+        console.log("         3- Retirar clientes da fila       ");
+        console.log("         0- Sair                           ");
+        console.log("                                           ");
+        console.log("*******************************************");
+
+        opcao = readline.questionInt("\nEntre com a opcao desejada: ")
+
+        switch(opcao){
+                case 1: 
+                        const nome = readline.question("\nDigite o nome: ");
+                        fila.enqueue(nome);
+                        console.log("\nFila:\n");
+                        fila.printQueue();
+                        console.log("\nCliente Adicionado!");
+                        break;
+                case 2: 
+                        if(fila.isEmpty())
+                                console.log("\nA fila esta vazia!");
+                        else{
+                                console.log("\nLista de clientes na fila:\n")
+
+                                fila.printQueue();
+                        }
+                        break;
+                case 3: 
+                        if(fila.isEmpty())
+                                console.log("\nA fila esta vazia!\n");
+                        else{
+                                console.log("\nFila:\n");
+
+                                fila.dequeue(); 
+
+                                fila.printQueue(); 
+
+                                console.log("\nO cliente foi chamado!\n");
+
+                        }
+                        break;
+                case 0: 
+                        console.log("\nPrograma finalizado! ");
+                        break;
+                default:
+                        console.log("\nDigite uma opcao valida! ")
+
         }
-        break;
-    
-    case 0:
-        console.log("Programa Finalizado!")
-        break;
-        
-    default:
-        console.log("Opcao Invalida!")
-        break;
+
 }
-}while(opcao !== 0)
+while(opcao !== 0);
+
+
+
